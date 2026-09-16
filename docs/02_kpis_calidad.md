@@ -35,7 +35,7 @@ flowchart TB
     A --> E[(Historial de cada carga)]
     C --> F[Tablero en Power BI]
     D --> F
-    D --> G[Alertas]
+    C --> G[Alertas]
     F --> H[Usuarios de negocio]
 ```
 

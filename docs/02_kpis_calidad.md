@@ -35,6 +35,36 @@ flowchart TB
     A --> E[(Historial de cada carga)]
     C --> F[Tablero en Power BI]
     D --> F
-    C --> G[Alertas]
+    D --> G[Alertas]
     F --> H[Usuarios de negocio]
+```
+
+### ¿Cómo se guardan las reglas?
+
+```sql
+-- Las reglas se guardan como datos en una tabla, no escritas en el codigo.
+-- Asi, agregar una regla nueva no necesita que un programador haga un cambio.
+CREATE TABLE regla_calidad (
+    id_regla       STRING,
+    dataset        STRING,
+    dimension      STRING,   -- Completitud, Validez, etc
+    descripcion    STRING,   -- explicada en lenguaje simple
+    condicion_sql  STRING,   -- lo que se debe cumplir
+    umbral_alerta  DECIMAL,  -- si baja de esto, se avisa
+    umbral_bloqueo DECIMAL,  -- si baja de esto, se detiene el proceso
+    responsable    STRING,
+    activa         BOOLEAN
+)
+
+-- Aqui se guarda el resultado de cada revision, con fecha,
+-- para poder ver si la calidad mejora o empeora con el tiempo.
+CREATE TABLE resultado_regla (
+    id_corrida      STRING,
+    id_regla        STRING,
+    fecha           TIMESTAMP,
+    total_evaluado  BIGINT,
+    total_correcto  BIGINT,
+    porcentaje      DECIMAL,
+    estado          STRING    -- OK, ALERTA o BLOQUEO
+);
 ```

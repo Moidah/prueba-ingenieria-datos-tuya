@@ -69,3 +69,46 @@ puntaje = 40% que tan reciente es el dato
 ```
 
 Estos porcentajes se guardan en una tabla de configuración, no metidos directo en el codigo. Asi, si el negocio quiere cambiar los pesos, no hay que modificar nada de programacion.
+
+
+## 4. El proceso de CI/CD (control automatico de calidad antes de publicar)
+
+```mermaid
+flowchart TD
+    A[Se sube un cambio] --> B[Revision automatica del codigo]
+    B --> C[Pruebas: el numero se normaliza bien?]
+    C --> D[Prueba con datos de ejemplo]
+    D --> E{Alguien revisa el cambio}
+    E -->|aprobado| F[Se une a la version principal]
+    F --> G[Se prueba en un ambiente de pruebas]
+    G --> H{Pasa los controles de calidad?}
+    H -->|si| I[Se publica en produccion]
+    H -->|no| J[Se bloquea y se avisa]
+```
+
+**¿Que se guarda en Git:?** todo. No solo el codigo, tambien las reglas de calidad, la definicion del puntaje y la documentacion. Si algo no esta en Git, no se puede revisar ni volver atras si algo sale mal.
+
+**¿Que bloquea que algo se publique:?**
+
+| Control | Se bloquea si... |
+|---|---|
+| Pruebas del codigo | alguna prueba falla |
+| Cantidad de filas | cambia mas de 10% sin razon |
+| Llave duplicada | hay clientes repetidos como principal |
+| Numeros validos | menos del 95% pasa la normalizacion |
+
+La idea central: si algo esta mal, el proceso se detiene solo, no publica con una advertencia. Un dataset de telefonos malo significa mandar campanas a numeros equivocados, y eso cuesta plata real.
+
+**¿Como se publica:?** primero se escribe en una tabla temporal, se revisa que todo este bien, y solo ahi se reemplaza la tabla que usa el negocio. Asi nadie ve nunca una version a medio hacer.
+
+
+## 5. Matenimiento:
+
+- Cada día se introducen nuevas modificaciones y, una vez a la semana, se realiza una carga completa para garantizar que nada quede desincronizado.
+- Cuando el número principal de un cliente cambia, el anterior se guarda con la fecha en que dejó de ser el principal (esto se llama historización). Con esto no se puede saber que número se utilizó en una campana de hace 3 meses.
+- El resultado de cada llamada (contesto, no contesto, numero equivocado) se guarda y sirve para mejorar el puntaje de confianza del número. Así el dataset va mejorando con el tiempo en vez de quedarse estático.
+
+## 6. Cosas que se estan asumiendo:
+
+- Hay un identificador unico de cliente que es el mismo en todos los sistemas. Si no existiera habria que resolver eso primero antes de este proyecto.
+- El volumen de datos justifica el uso de herramientas de procesamiento distribuido (como Spark) con menos datos, una base de datos normal funciona igual de bien.

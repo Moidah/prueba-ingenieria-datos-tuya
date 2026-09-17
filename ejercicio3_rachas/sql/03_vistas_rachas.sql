@@ -1,10 +1,6 @@
--- ================================================
---   Archivo: 03_vistas_rachas.sql
--- Moisés Arrieta
--- 17/09/2026
--- ==============================0================
-
 /*
+   Archivo: 03_vistas_rachas.sql
+
    Aqui se arma la logica para encontrar las "rachas": meses
    seguidos en los que un cliente se mantuvo en el mismo nivel
    de saldo (N0, N1, N2, N3 o N4).
@@ -15,10 +11,10 @@
        UPDATE parametros SET fecha_base = '2024-06-30', n_minimo = 4;
 
    El plan tiene 4 pasos, cada uno es una vista (una consulta guardada):
-   1. calendario -> lista de todos los fin de mes hasta la fecha_base
-   2. vigencia -> desde cuando hasta cuando cuenta cada cliente
-   3. panel -> una fila por cada cliente y cada mes, sin huecos
-   4. islas -> agrupa los meses seguidos que tienen el mismo nivel
+   1. calendario   -> lista de todos los fin de mes hasta la fecha_base
+   2. vigencia     -> desde cuando hasta cuando cuenta cada cliente
+   3. panel        -> una fila por cada cliente y cada mes, sin huecos
+   4. islas        -> agrupa los meses seguidos que tienen el mismo nivel
 */
 
 
@@ -47,7 +43,7 @@ calendario (corte_mes) AS (
     FROM calendario
     WHERE corte_mes < (SELECT corte_fin FROM limites)
 )
-SELECT corte_mes FROM calendario
+SELECT corte_mes FROM calendario;
 
 
 /*
@@ -72,7 +68,7 @@ SELECT
     ) AS fecha_fin_vigencia
 FROM historia h
 LEFT JOIN retiros r ON r.identificacion = h.identificacion
-GROUP BY h.identificacion, r.fecha_retiro
+GROUP BY h.identificacion, r.fecha_retiro;
 
 
 /*
@@ -107,7 +103,7 @@ JOIN v_calendario c
     AND c.corte_mes <= v.fecha_fin_vigencia
 LEFT JOIN historia h
      ON h.identificacion = v.identificacion
-    AND h.corte_mes      = c.corte_mes
+    AND h.corte_mes      = c.corte_mes;
 
 
 /*
@@ -159,4 +155,4 @@ SELECT
     MIN(corte_mes) AS fecha_inicio,
     MAX(corte_mes) AS fecha_fin
 FROM marcado
-GROUP BY identificacion, nivel, isla
+GROUP BY identificacion, nivel, isla;

@@ -105,3 +105,19 @@ En Power BI esto se arma con un modelo tipo estrella: una tabla central de resul
 | Usuarios | Reportan cuando ven algo raro |
 
 Lo importante: las alertas graves tienen que llegarle a una persona especifica con nombre y con un tiempo esperado de respuesta. Una alerta que no le llega a nadie en particular, nadie la atiende.
+
+## 6. ¿Que hace que esto funcione de verdad?
+
+- **Muestra tendencia, no solo la foto de hoy.** Un 94 % de completitud no dice mucho. Un 94 % que provenía de un 98 % hace tres semanas indica un problema.
+
+- **Se puede bajar al detalle.** El usuario puede pasar de ver «hay 4000 errores» a ver exactamente cuáles son y por qué.
+
+- **Se retroalimenta.** El resultado de las llamadas reales se guarda y mejora el puntaje de los números con el tiempo, y no se queda siempre igual.
+
+## 7. ¿Que se podria agregar despues?
+
+- Acuerdos formales entre quien entrega los datos y quien los consume, verificados automáticamente.
+
+- Alertas automáticas cuando algo se sale de lo normal, en vez de usar solo límites fijos.
+
+- Un catálogo de datos donde se pueda ver en un solo lugar el diccionario, de donde viene cada dato y su calidad.

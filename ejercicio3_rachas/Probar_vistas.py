@@ -14,9 +14,9 @@ resultado = pd.read_sql_query(
 print(resultado.head(20))
 print(resultado.shape)
 
-# Verificar un cliente puntual a mano
-cliente = pd.read_sql_query(
-    "SELECT * FROM v_panel_mensual WHERE identificacion = '09SYGN7IXDQV5X9IP' ORDER BY corte_mes",
-    conn
-)
-print(cliente.to_string(index=False))
+# # Verificar un cliente puntual a mano
+# cliente = pd.read_sql_query(
+#     "SELECT * FROM v_panel_mensual WHERE identificacion = '09SYGN7IXDQV5X9IP' ORDER BY corte_mes",
+#     conn
+# )
+# print(cliente.to_string(index=False))

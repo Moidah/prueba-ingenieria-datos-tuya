@@ -1,6 +1,6 @@
-# Prueba tecnica - Ingenieria de Datos
+# Prueba tecnica - Ingeniero de Datos jr
 
-Este repositorio tiene la solucion a la prueba tecnica. Aqui te cuento de que trata cada parte.
+Este repositorio tiene la solucion a la prueba tecnica. aca se presenta de que trata cada ejercicio:
 
 ## Ejercicio 1 - Dataset de telefonos de clientes
 

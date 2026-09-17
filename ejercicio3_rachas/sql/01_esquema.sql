@@ -22,3 +22,22 @@ CREATE TABLE stg_retiros (
     fecha_retiro   TEXT
 )
 
+-- --------------------------- CAPA CORE -------------------------------
+-- La llave primaria compuesta materializa la regla de negocio:
+-- un cliente tiene a lo sumo un saldo por corte de mes.
+
+DROP TABLE IF EXISTS historia;
+CREATE TABLE historia (
+    identificacion TEXT    NOT NULL,
+    corte_mes      TEXT    NOT NULL,   -- ISO 'YYYY-MM-DD', siempre fin de mes
+    saldo          INTEGER NOT NULL CHECK (saldo >= 0),
+    PRIMARY KEY (identificacion, corte_mes)
+);
+
+DROP TABLE IF EXISTS retiros;
+CREATE TABLE retiros (
+    identificacion TEXT NOT NULL PRIMARY KEY,
+    fecha_retiro   TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_historia_corte ON historia (corte_mes)

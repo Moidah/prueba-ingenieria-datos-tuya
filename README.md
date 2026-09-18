@@ -1,6 +1,6 @@
-# Prueba tecnica - Ingeniero de Datos jr
+# Prueba tecnica - Ingenieria de Datos
 
-Este repositorio tiene la solucion a la prueba tecnica. aca se presenta de que trata cada ejercicio:
+Este repositorio tiene la solucion a la prueba tecnica. Aqui te cuento de que trata cada parte.
 
 ## Ejercicio 1 - Dataset de telefonos de clientes
 
@@ -64,3 +64,13 @@ python src/validar_rachas.py
 El primero carga el Excel a la base de datos y aplica las reglas de calidad. El segundo corre la consulta de rachas, y puedes cambiar la fecha y el numero minimo de meses como quieras. El tercero corre la validacion cruzada contra pandas, para confirmar que el resultado es correcto.
 
 Si quieres ver el detalle completo de como esta armada la consulta paso a paso, esta explicado en [`ejercicio3_rachas/README.md`](ejercicio3_rachas/README.md).
+
+## Ejercicio 4 - Imagenes de HTML a base64
+
+Un programa que busca archivos HTML (sueltos o dentro de carpetas), encuentra sus imagenes, las convierte a base64, y genera un archivo nuevo con las imagenes ya incrustadas, sin tocar el original. Al final entrega un resumen de que imagenes se convirtieron bien y cuales fallaron. Se hizo usando solo lo que ya viene incluido en Python, sin instalar nada externo.
+
+Mas detalle en [`ejercicio4_html_base64/README.md`](ejercicio4_html_base64/README.md).
+
+## Sobre la organizacion de este repositorio
+
+Cada ejercicio tiene su propia carpeta, y adentro de cada una hay un `README.md` que explica con mas detalle el problema, la solucion y como correr el codigo. Este archivo de aca es solo un resumen general para tener una vista rapida de todo el proyecto.

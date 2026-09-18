@@ -1,4 +1,4 @@
-# Prueba tecnica - Ingenieria de Datos
+# Prueba tecnica - Ingenieria de Datos jr
 
 Este repositorio tiene la solucion a la prueba tecnica. Aqui te cuento de que trata cada parte.
 
